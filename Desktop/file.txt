@@ -1,0 +1,86 @@
+customer
+create customer
+create login
+delete customer
+get
+
+
+
+customer create booking
+booking name,no.of seat,
+multi adress desntination.
+
+
+
+create table cust(cust_no interger autoIncrement primary key,first_name varchar(20),last_name varchar(20),email varchar(20), password varchar(),date)
+
+create table add(addres_no integer autoIncrement,cust_no integer, seats ineteger,latitude double,longitude double )
+
+
+cust
+cust_id: primarykey autoincrement
+firstname
+lastname:
+date()
+
+booking
+booking_id autoIncrmant primary key
+booking_type:
+address_id:foriegn
+cust_id: foreingn key
+driver_id
+date 
+
+driver
+ driver_id autoincremet primary key
+driver_name
+db.customer.aggregate([{$unwind:"$_id"},{$lookup:{from:"address",localField:"_id",foreignField:"user_id",as:"customer_doc"}},{$match:{"customer_doc":{$ne: []}}}])
+
+
+
+
+adress
+addres_id primary key
+cust_id foreing key
+adrress:
+
+
+db.user.aggregate({$project:{date:{$dateFromParts:{'year':2018,'month':4,'day':25}}}}).pretty()
+db.user.aggregate([{$project:{date:{$dateFromParts:{'year':2018,'month':4,'day':25}}}},{$count:"total date"}])
+db.user.aggregate([{$project:{date:{$dateFromString:{dateString:'$date'}}}},{$count:"total date"}])
+
+
+
+db.user.aggregate( [ {
+   $project: {
+      date: {
+         $dateFromString: {
+            dateString: '$date',
+            timezone: '$timezone'
+         }
+      }
+   }
+} ] )
+
+db.user.aggregate([
+ {
+    $project: {
+       date: {
+          $dateToParts: { date: "$date" }
+       }}})
+
+db.user.aggregate([
+ {
+    $project: {
+       date: {
+          $dateToParts: { date: "$date" }
+       }
+}])
+
+
+db.user.aggregate([$project:{$match:{date:{$dateToString: { format: "%Z", date: "$date", timezone: "+04:30" } }}}])
+
+toISOString()
+
+
+db.user.aggregate([{$match:{date:{$dateFromString:{dateString: new Date("2018-04-26").toISOString()}}}}])
